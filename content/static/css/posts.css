@@ -1,0 +1,299 @@
+/* Контент Изображений */
+.main {
+    width: 100%;
+    padding: 0 20px;
+    column-gap: 10px;
+    columns: 6;
+}
+
+
+.main .card {
+    max-width: 280px;
+    margin-bottom: 10px;
+    break-inside: avoid;
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+
+.details {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: -100%;
+    position: absolute;
+    background: #1f3d4738;
+    backdrop-filter: blur(5px);
+    border-radius: 15px;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: 1s;
+    cursor: pointer;
+}
+
+.card:hover .details {
+    right: 0;
+}
+
+.details h2 {
+    overflow-wrap: break-word;
+    word-break: break-word;
+    text-transform: uppercase;
+    font-size: 30px;
+    color: #fff;
+    font-weight: 600;
+}
+
+.details p.owner {
+    text-transform: capitalize;
+    font-weight: 400;
+    padding-bottom: 10px;
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+    z-index: 1000000;
+}
+
+/* Категории */
+.catbar {
+    padding-bottom: 10px;
+    position: relative;
+    text-align: center;
+}
+
+.catbar h2,
+.catbar .toggle_cat {
+    display: inline;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1fab89;
+    margin-right: 5px;
+}
+
+.catbar .toggle_cat {
+    cursor: pointer;
+}
+
+.catbar h2 a {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-right: 5px;
+}
+
+.midbar {
+    position: relative;
+    /*display: none;*/
+    height: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: height .7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.midbar.open {
+    height: 8rem;
+}
+
+.midbar ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+
+    /*width: 320px;*/
+    margin: 20px 70px 0;
+    /*margin-right: 40px;*/
+    /*margin-top: 20px;*/
+}
+
+.midbar ul li {
+    position: relative;
+    display: inline-block;
+    margin: 0 4px 8px;
+    border-radius: 30px;
+    width: 200px;
+    height: 100px;
+    overflow: hidden;
+}
+
+.midbar a {
+    display: block;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.midbar img {
+    width: 100%;
+    object-fit: cover;
+}
+
+.cat_text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-weight: bold;
+}
+
+.cat_text a {
+    font-size: 2em;
+    color: #178066;
+    -webkit-text-stroke: 1px #fff;
+}
+
+.selected {
+    /*    font-weight: bold;*/
+    border: 3px solid greenyellow;
+}
+
+/*Страница Поста */
+.wrap_post {
+    /*max-height: 890px;*/
+    display: flex;
+    justify-content: center;
+}
+
+.content_post {
+    max-width: 1000px;
+    box-shadow: rgba(0, 0, 0, 0.5) 0 1px 20px 0;
+    border-radius: 32px;
+    /*height: 700px;*/
+    height: 600px;
+}
+
+.post {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    /*align-items: center;*/
+}
+
+.post_image .image {
+    /*max-height: 650px;*/
+    /*max-width: 600px;*/
+    max-height: 550px;
+    max-width: 500px;
+    float: left;
+    border-radius: 40px;
+    overflow: hidden;
+    margin: 20px;
+}
+
+.post_text {
+    /*height: 600px;*/
+    width: 400px;
+    margin: 50px;
+    overflow: auto;
+    word-wrap: break-word;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.container_owner {
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+    background: #ffeeff;
+    justify-content: space-between;
+}
+
+.owner {
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+}
+
+.owner_image {
+    max-height: 80px;
+    max-width: 80px;
+    float: left;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 6px;
+}
+
+.owner_info {
+    display: flex;
+    flex-direction: column;
+}
+
+.save {
+    text-align: center;
+    padding: 5px;
+    font-weight: 600;
+    font-size: 1em;
+    border-radius: 30px;
+    background: #178066;
+    height: 30px;
+    width: 120px;
+}
+
+.container_owner button {
+    background: red;
+    width: 150px;
+    height: 50px;
+}
+
+
+/*Форма добавления поста*/
+.add_post {
+    position: relative;
+    display: flex;
+    /* align-items: center; */
+    align-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.form-input {
+    max-width: 1200px;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    background: transparent;
+    border: 3px solid #fff;
+    border-radius: 20px;
+    box-sizing: border-box;
+}
+
+
+.add_btn {
+    background: #81d4fa;
+    border: 2px solid #264b5d;
+    width: 100%;
+    padding: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 40px;
+    max-width: 1200px;
+}
+
+form label {
+    font-size: 18px;
+}
+
+
+@media (max-width: 992px) {
+    .main {
+        columns: 4;
+    }
+
+}
+
+@media (max-width: 660px) {
+    .main {
+        columns: 2;
+    }
+}
+

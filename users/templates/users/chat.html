@@ -1,0 +1,19 @@
+{% extends 'content/base.html' %}
+{% load static %}
+{% block css %}
+<link href="{% static 'css/message.css' %}" rel="stylesheet">
+{% endblock css %}
+{% block content %}
+<div class="wrap_post">
+    <div class="content_post">
+        <h1>Чат с пользователем {{ recipient.username }}</h1>
+        <div class="chat">
+        </div>
+        <form id="message-form" method="post">
+            {% csrf_token %}
+            <input type="text" name="content">
+            <input type="submit" value="Отправить">
+        </form>
+    </div>
+</div>
+{% endblock %}

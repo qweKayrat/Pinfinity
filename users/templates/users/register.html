@@ -1,0 +1,50 @@
+{% extends 'content/base.html' %}
+{% load static %}
+{% block css %}
+<link href="{% static 'css/loginPage.css' %}" rel="stylesheet">
+{% endblock css %}
+{% block content %}
+<!-- Регистрация -->
+<section class="back">
+    <div class="wrapper active">
+    <span class="icon-close">
+    <a href="{% url 'index' %}">
+        <i class="fa-solid fa-xmark icn-close"></i>
+    </a>
+    </span>
+        <div class="form-box register">
+            <h2>Регистрация</h2>
+            <form method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                <div class="input-box">
+                <span class="icon">
+                {% if field.label == 'Почта' %}
+                    <i class="fa-solid fa-envelope"></i>
+                {% elif field.label == 'Имя пользователя' %}
+                    <i class="fa-solid fa-user"></i>
+                {% elif field.label == 'Пароль' %}
+                    <i class="fa-solid fa-lock"></i>
+                {% elif field.label == 'Подтверждение пароля' %}
+                    <i class="fa-solid fa-lock"></i>
+                {% endif %}
+                </span>
+                    {{ field }}
+                    <label>{{ field.label }}</label>
+                    {% for error in field.errors %}
+                    <p style="color: red">{{ error }}</p>
+                    {% endfor %}
+                </div>
+                {% endfor %}
+                <div class="remember-forgot">
+                    <label><input type="checkbox">Я согласен с правилами и условиями</label>
+                </div>
+                <button type="submit" class="btn">Регистрация</button>
+                <div class="login-register">
+                    <p>Уже есть аккаунт? <a href="{% url 'login' %}" class="login-link">Войти</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock content %}

@@ -1,0 +1,68 @@
+{% extends 'content/base.html' %}
+{% load static %}
+{% block css %}
+<link href="{% static 'css/posts.css' %}" rel="stylesheet">
+{% endblock css %}
+{% block content %}
+<div class="wrap_post">
+    <div class="content_post">
+        <div class="post">
+            <div class="post_image">
+                <img src="{{ post.image.url }}" alt="image {{ post.title }}" class="image">
+            </div>
+            <div class="post_text">
+                {% if post.source_link %}
+                <a href="{{ post.source_link }}">Источник</a>
+                {% endif %}
+                <h1>{{ post.title }}</h1>
+                {% if post.content %}
+                <div class="post_text">
+                    <p>Описание</p>
+                    {{ post.content|linebreaks }}
+                </div>
+                {% endif %}
+                <div class="container_owner">
+                    <div class="owner">
+                        <div class="owner_image">
+                            <img src="{{ post.owner.img.url }}" alt="image {{ post.owner.username }}" class="image">
+                        </div>
+                        <div class="owner_info">
+                            <a href="{% url 'profile' post.owner.username %}">{{ post.owner.username }}</a>
+                            <p>6500 Подписчик</p>
+                        </div>
+                    </div>
+                    <button class="sub">Подписаться</button>
+                </div>
+                <div class="cats">
+                    <ul>
+                        {% for cat in post.cat.all %}
+                        <li>
+                            <a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <p>Комментарии:</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<div class="other_content">-->
+<!--    <p>Похожие</p>-->
+<!--    {% for p in cats.content.all %}-->
+<!--    {% if p.category == post.category %}-->
+<!--    <div class="card">-->
+<!--        <a href="{{ p.get_absolute_url }}">-->
+<!--            <div class="pict">-->
+<!--                <img src="{{ p.image.url }}" alt="image {{ p.title }}" class="image">-->
+<!--            </div>-->
+<!--        </a>-->
+<!--        <div class="details">-->
+<!--            <a href="{{ post.get_absolute_url }}"><h2>{{ p.title|linebreaks|truncatewords:20 }}</h2></a>-->
+<!--            <p class="owner">author: <a href="#">{{ p.owner }}</a></p>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    {% endif %}-->
+<!--    {% endfor %}-->
+<!--</div>-->
+{% endblock %}

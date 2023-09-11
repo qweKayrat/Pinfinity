@@ -1,0 +1,59 @@
+{% extends 'content/base.html' %}
+{% load static %}
+{% block css %}
+<link href="{% static 'css/posts.css' %}" rel="stylesheet">
+{% endblock css %}
+{% block content %}
+<div class="catbar">
+    {% if selected == 0%}
+    <h2>Выбрать категорию</h2>
+    {% else %}
+    <h2><a href="{% url 'index' %}">Открыть все категории</a></h2>
+    {% endif %}
+    <div class="toggle_cat">
+        <i class="fa-solid fa-angle-up"></i>
+    </div>
+    <div class="midbar open">
+        <ul>
+            {% for cat in cats %}
+            {% if cat.content__count > 0 %}
+            {% if cat.pk == selected %}
+            <li class="selected">
+                <img src="{{ cat.img.url }}" alt="">
+                <div class="cat_text">
+                    <a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
+                </div>
+            </li>
+            {% else %}
+            <li>
+                <a href="{{ cat.get_absolute_url }}"><img src="{{ cat.img.url }}" alt=""></a>
+                <div class="cat_text">
+                    <a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
+                </div>
+            </li>
+            {% endif %}
+            {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+<div class="main">
+    {% for post in posts %}
+    <div class="card">
+        <div class="pict">
+            <a href="{{ post.get_absolute_url }}">
+                <img src="{{ post.image.url }}" alt="image {{ post.title }}" class="image">
+            </a>
+        </div>
+        <div class="details" onclick="window.location='{{ post.get_absolute_url }}'">
+            <a href="{{ post.get_absolute_url }}"><h2>{{ post.title|linebreaks|truncatewords:20 }}</h2></a>
+            {% if post in saved_post.all %}
+            <p class="owner"><a href="{% url 'saved_remove' post.id %}" class="save">сохранено</a></p>
+            {% else %}
+            <p class="owner"><a href="{% url 'saved_add' post.id %}" class="save">сохранить</a></p>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}

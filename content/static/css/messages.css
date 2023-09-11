@@ -1,0 +1,86 @@
+/* Сообщения */
+.inbox {
+    max-width: 60%;
+    margin: 0 auto;
+}
+
+.inbox__title,
+.inbox__title span {
+    font-size: 2rem;
+    font-weight: 700;
+    color: green;
+    text-transform: uppercase;
+    text-align: left;
+    margin-bottom: 0.5em;
+    /*margin: 0 3rem 1em;*/
+}
+
+.inbox__title span {
+    margin: 0;
+}
+
+.messages {
+    display: flex;
+    flex-direction: column;
+}
+
+.message {
+    display: flex;
+    background: green;
+    margin-bottom: 10px;
+    border: 2px solid #000;
+    border-radius: 20px;
+}
+
+.sender_image {
+    max-width: 60px;
+    max-height: 60px;
+    margin: 20px 10px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.message_text {
+    width: 100%;
+}
+
+.header_message {
+    display: flex;
+    margin-bottom: 3px;
+}
+
+.header_message > * {
+    margin: 7px;
+}
+
+.message__date {
+    flex-basis: 100%;
+    text-align: right;
+    margin: 7px;
+}
+
+.message__body {
+    margin-left: 30px;
+}
+
+/* Чат */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

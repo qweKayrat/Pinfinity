@@ -1,0 +1,94 @@
+{% extends 'content/base.html' %}
+{% load static %}
+{% block css %}
+<link href="{% static 'css/profile.css' %}" rel="stylesheet">
+<link href="{% static 'css/posts.css' %}" rel="stylesheet">
+{% endblock css %}
+{% block content %}
+
+<div class="user">
+    <div class="user_image">
+        <img src="{{ user.img.url }}" alt="{{ user.username }}" class="image">
+    </div>
+    <div class="username">@{{ user.username }}</div>
+    {% if user.first_name %}
+    <div class="name">Имя: {{ user.first_name }}</div>
+    {% else %}
+    <div class="name">Имя: Инкогнито</div>
+    {% endif %}
+    <div class="subs">0 подписок</div>
+    {% if user == request.user %}
+    <div class="change_profile">
+        <a href="#">Изменить профиль</a>
+    </div>
+    {% else %}
+    <div class="change_profile">
+        <a href="#">Подписаться</a>
+    </div>
+    {% endif %}
+    <div class="users_content">
+        <div class="create active">Созданные</div>
+        <div class="saved">Сохраненные</div>
+    </div>
+</div>
+<div class="users_main">
+    <div class="content-c active">
+        {% if not user.content_set.all %}
+        <div class="text">
+            <p>Здесь пока ничего нет. Тут будут отображаться изображения, которые вы создадите.</p>
+            <div class="button">
+                <a href="{% url 'add_post' %}">Создать идею</a>
+            </div>
+        </div>
+        {% endif %}
+        <div class="create_post">
+            {% for post in user.content_set.all %}
+            <div class="card">
+                <div class="pict">
+                    <a href="{{ post.get_absolute_url }}">
+                        <img src="{{ post.image.url }}" alt="image {{ post.title }}" class="image">
+                    </a>
+                </div>
+                <div class="details" onclick="window.location='{{ post.get_absolute_url }}'">
+                    <a href="{{ post.get_absolute_url }}"><h2>{{ post.title|linebreaks|truncatewords:20 }}</h2></a>
+                    <p class="owner">
+                        <button class="save">сохранить</button>
+                    </p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="content-s">
+        {% if not saved_post %}
+        <div class="text">
+            <p>Здесь пока ничего нет. Тут будут отображаться изображения, которые вы сохраните.</p>
+            <div class="button">
+                <a href="{% url 'index' %}">Найти идею</a>
+            </div>
+        </div>
+        {% endif %}
+        <div class="saved_post">
+            {% for post in saved_post %}
+            <div class="card">
+                <div class="pict">
+                    <a href="{{ post.content.get_absolute_url }}">
+                        <img src="{{ post.content.image.url }}" alt="image {{ post.content.image.title }}" class="image">
+                    </a>
+                </div>
+                <div class="details" onclick="window.location='{{ post.content.get_absolute_url }}'">
+                    <a href="{{ post.content.get_absolute_url }}">
+                        <h2>{{ post.content.title|linebreaks|truncatewords:20 }}</h2>
+                    </a>
+                    <p class="owner">
+                        <button class="save">сохранить</button>
+                    </p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+<script src="{% static 'js/profile.js' %}"></script>
+{% endblock %}

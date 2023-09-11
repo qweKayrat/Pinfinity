@@ -1,0 +1,188 @@
+.user {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.user_image {
+    max-width: 250px;
+    max-height: 250px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.user > * {
+    margin-bottom: 7px;
+}
+
+.user .username {
+    font-size: 1.7rem;
+    font-weight: 500;
+    padding-bottom: 5px;
+}
+
+.user .name {
+    font-size: 0.9rem;
+    font-weight: 400;
+}
+
+.user .subs {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.change_profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    height: 50px;
+    background: darkgray;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.change_profile:hover {
+    background: lightgray;
+}
+
+.change_profile a,
+.change_profile a:hover,
+.text a,
+.text a:hover {
+    color: #27dfac;
+}
+
+
+.users_content {
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.users_content .create,
+.users_content .saved {
+    display: flex;
+    height: 50px;
+    width: 130px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 1s;
+}
+
+.users_content .create.active,
+.users_content .saved.active {
+    border-bottom: 2px solid black;
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.text > * {
+    margin: 4px;
+}
+
+.text .button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 40px;
+    background: #1fab89;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.text .button:hover {
+    background: #178066;
+}
+
+
+.content-c, .content-s {
+    position: relative;
+    width: 100%;
+    display: none;
+}
+
+.content-c.active, .content-s.active {
+    display: block;
+}
+
+.create_post, .saved_post {
+    position: absolute;
+    padding: 0 20px;
+    column-gap: 10px;
+    columns: 6;
+}
+
+.users_main .card {
+    max-width: 280px;
+    margin-bottom: 10px;
+    break-inside: avoid;
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.details {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: -100%;
+    position: absolute;
+    background: #1f3d4738;
+    backdrop-filter: blur(5px);
+    border-radius: 15px;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.card:hover .details {
+    right: 0;
+}
+
+.details h2 {
+    overflow-wrap: break-word;
+    word-break: break-word;
+    text-transform: uppercase;
+    font-size: 30px;
+    color: #fff;
+    font-weight: 600;
+}
+
+.details p.owner {
+    text-transform: capitalize;
+    font-size: 14px;
+    font-weight: 400;
+    padding-bottom: 10px;
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+    z-index: 1000000;
+}
+
+/*@media (max-width: 992px) {*/
+/*    .main {*/
+/*        columns: 4;*/
+/*    }*/
+
+/*}*/
+
+/*@media (max-width: 660px) {*/
+/*    .main {*/
+/*        columns: 2;*/
+/*    }*/
+/*}*/
+

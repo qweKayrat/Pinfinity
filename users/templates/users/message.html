@@ -1,0 +1,37 @@
+{% extends 'content/base.html' %}
+{% load static %}
+{% block css %}
+<link href="{% static 'css/messages.css' %}" rel="stylesheet">
+{% endblock css %}
+{% block content %}
+
+<!-- Main Section -->
+<main class="inbox">
+    <div class="content-box">
+        <h3 class="inbox__title">New Messages(<span>3</span>)</h3>
+        <ul class="messages">
+            {% for message in messages %}
+            {% if not message.is_read %}
+            <li class="message message--unread">
+                {% else %}
+            <li class="message">
+                {% endif %}
+                <div class="sender_image">
+                    <a href="#"><img src="{{ message.sender.img.url }}" class="image"></a>
+                </div>
+                <div class="message_text">
+                    <a href="{% url 'chat' message.sender.username %}">
+                        <div class="header_message">
+                            <span class="message__author">{{ message.sender.username }}</span>
+                            <span class="message__date">{{ message.created|date:'d:m:Y' }}</span>
+                        </div>
+                        <span class="message__body">{{ message.body|slice:50 }}</span>
+                    </a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</main>
+
+{% endblock content %}

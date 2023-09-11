@@ -1,0 +1,219 @@
+.back {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    height: 90vh;
+    background: transparent;
+}
+
+
+.wrapper {
+    position: relative;
+    width: 450px;
+    height: 500px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .5);
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, .5);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.wrapper.active {
+    height: 600px;
+}
+
+.wrapper .form-box {
+    width: 100%;
+    padding: 40px;
+    opacity: 1;
+}
+
+
+.wrapper .icon-close .icn-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 45px;
+    height: 45px;
+    background: #1fab89;
+    font-size: 2em;
+    color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom-left-radius: 20px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.form-box h2 {
+    padding-top: 20px;
+    font-size: 2em;
+    color: #000;
+    text-align: center;
+}
+
+.input-box {
+    position: relative;
+    width: 100%;
+    height: 45px;
+    border-bottom: 2px solid white;
+    margin: 50px 0;
+}
+
+.input-box label {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    font-size: 1em;
+    color: #000;
+    font-weight: 500;
+    pointer-events: none;
+    transform: translateY(-50%);
+    transition: .5s;
+}
+
+.input-box input:focus ~ label,
+.input-box input:valid ~ label {
+    top: -5px;
+}
+
+.input-box input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    color: #000;
+    font-weight: 600;
+    padding: 0 35px 0 5px;
+}
+
+.input-box .icon {
+    position: absolute;
+    right: 8px;
+    font-size: 1.2em;
+    color: #000;
+    line-height: 57px;
+}
+
+.remember-forgot {
+    font-size: .9em;
+    color: #000;
+    font-weight: 500;
+    margin: -15px 0 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.remember-forgot label input {
+    accent-color: #000;
+    margin-right: 3px;
+}
+
+.remember-forgot a {
+    color: #000;
+    text-decoration: none;
+}
+
+.remember-forgot a:hover {
+    text-decoration: underline;
+}
+
+.btn {
+    width: 100%;
+    height: 45px;
+    background: #178066;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    color: white;
+    font-weight: 500;
+}
+
+.login-register {
+    font-size: .9em;
+    color: #000;
+    text-align: center;
+    font-weight: 500;
+    margin: 25px 0 10px;
+}
+
+.login-register p a {
+    color: #000;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.login-register p a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 400px) {
+    .wrapper {
+        width: 100%;
+        height: 100vh;
+        border: none;
+        border-radius: 0;
+    }
+
+    .input-box {
+        width: 290px;
+    }
+
+    .navigation {
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 55px;
+        background: #27dfac;
+        border-radius: 0;
+    }
+
+    .navigation ul {
+        display: flex;
+    }
+
+    .navigation ul li {
+        position: relative;
+        list-style: none;
+        width: 55px;
+        height: 50px;
+        border: 4px solid transparent;
+        border-radius: 10px;
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+
+    .navigation ul li a .icon-nav img {
+        width: 24px;
+        height: auto;
+        margin: 0 2px 5px 0;
+    }
+
+}
+
+@media (min-width: 401px) {
+    .navigation {
+        top: 10px;
+        right: 10px;
+    }
+
+}
+
+@media (max-width: 750px) {
+    .form {
+        display: none;
+        /*visibility: hidden;*/
+    }
+}
+
+
+

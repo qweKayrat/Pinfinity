@@ -1,0 +1,44 @@
+{% extends 'content/base.html' %}
+{% load static %}
+{% block css %}
+<link href="{% static 'css/loginPage.css' %}" rel="stylesheet">
+{% endblock css %}
+{% block content %}
+<!-- Авторизация -->
+<section class="back">
+    <div class="wrapper">
+    <span class="icon-close">
+    <a href="{% url 'index' %}">
+        <i class="fa-solid fa-xmark icn-close"></i>
+    </a>
+    </span>
+        <div class="form-box login">
+            <h2>Авторизация</h2>
+            <form method="post">
+                {% csrf_token %}
+                <div class="input-box">
+                    <span class="icon">
+                        <i class="fa-solid fa-envelope icn"></i>
+                    </span>
+                    <input type="text" name="username" required>
+                    <label>Логин</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon">
+                        <i class="fa-solid fa-lock"></i>
+                    </span>
+                    <input type="password" name="password" required>
+                    <label>Пароль</label>
+                </div>
+                <div class="remember-forgot">
+                    <a href="{% url 'reset_password' %}">Забыли пароль?</a>
+                </div>
+                <button type="submit" class="btn">Войти</button>
+                <div class="login-register">
+                    <p><a href="{% url 'register' %}" class="register-link">Создать аккаунт</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock content %}

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+{% load static %}
+{% load custom_query_transform %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pinfinity</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+          integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <!-- Favicon   -->
+    <link type="Image/x-icon" href="{% static 'images/favicon.jpg'%}" rel="icon">
+    <!-- base style -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}"/>
+    <!-- Custom styles for this template -->
+    {% block css %}{% endblock css %}
+</head>
+<body>
+<header>
+    <div class="navbar">
+        <div class="logo">
+            <a href="{% url 'index' %}"><img src="{% static 'images/logo.png' %}" alt="logo"></a>
+        </div>
+        <div class="post_links">
+            <ul class="links">
+                {% for m in menu %}
+                {% if m.url_name == 'add_post' %}
+                <li><a href="{% url m.url_name %}" class="action_btn">{{ m.title }}</a></li>
+                {% elif m.url_name == 'faq' %}
+                <div>
+                    <form id="search" class="form" action="{% url 'index' %}" method="get">
+                        <div class="form-search">
+                            <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <input class="search-ideas" type="text" name="search_query" placeholder="Поиск идей"/>
+                        </div>
+                    </form>
+                </div>
+                <li><a href="{% url m.url_name %}">{{ m.title }}</a></li>
+                {% elif m.title == 'Сообщения' %}
+                <li class="chats">
+                    <a href="{% url m.url_name %}"><i class="fa-solid fa-comment"></i></a>
+                </li>
+                {% elif m.title == 'Аккаунт' %}
+                <li class="toggle_account">
+                    <a href="{% url m.url_name request.user.username %}"><img src="{{ request.user.img.url }}" class="image"></a>
+                </li>
+                {% elif m.url_name == 'logout' %}
+                <li class="logout">
+                    <a href="{% url m.url_name %}"><i class="fa-solid fa-right-from-bracket"></i></a>
+                </li>
+                {% else %}
+                <li><a href="{% url m.url_name %}">{{ m.title }}</a></li>
+                {% endif %}
+                {% if ind == 3%}
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="toggle_btn">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+    <div class="dropdown_menu">
+        <ul class="links">
+            {% for m in menu %}
+            {% if m.url_name == 'profile' %}
+            <li><a href="{% url m.url_name request.user.username %}">{{ m.title }}</a></li>
+            {% else %}
+            <li><a href="{% url m.url_name %}">{{ m.title }}</a></li>
+            {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+</header>
+
+<div class="content">
+    <div class="wrap">
+        {% block content %}
+        {% endblock %}
+
+        {% if page_obj.has_other_pages %}
+        <div class="pagination">
+            <ul class="list-pages">
+                {% if page_obj.has_previous %}
+                <li class="page-num">
+                    <a href="?{% query_transform request search_query=search_query page=page_obj.previous_page_number %}">&lt;</a>
+                </li>
+                {% endif %}
+
+                {% for p in paginator.page_range %}
+                {% if page_obj.number == p %}
+                <li class="page-num page-num-selected">
+                    <span>{{ p }}</span>
+                </li>
+                {% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:+2 %}
+                <li class="page-num">
+                    <a href="?{% query_transform request search_query=search_query page=p %}">{{ p }}</a>
+                </li>
+                {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                <li class="page-num">
+                    <a href="?{% query_transform request search_query=search_query page=page_obj.next_page_number %}">&gt;</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+</div>
+<script src="{% static 'js/navbarJs.js' %}"></script>
+</body>
+</html>
+
