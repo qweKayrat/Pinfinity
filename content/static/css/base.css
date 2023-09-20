@@ -3,11 +3,12 @@
     padding: 0;
     box-sizing: border-box;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    user-select: none;
 }
 
 body {
     height: 100vh;
-    background: #eefcf0;
+    /*background: #eefcf0;*/
 }
 
 *, ::after, ::before {
@@ -24,6 +25,7 @@ a {
     font-size: 1.1rem;
     font-weight: 500;
 }
+
 
 a:hover {
     color: white;
@@ -250,7 +252,7 @@ header {
     }
 
     .navbar {
-        width: 92%;
+        /*width: 92%;*/
         justify-content: space-between;
     }
 

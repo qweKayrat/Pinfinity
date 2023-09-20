@@ -11,6 +11,11 @@
                 <img src="{{ post.image.url }}" alt="image {{ post.title }}" class="image">
             </div>
             <div class="post_text">
+                {% if post.saved %}
+                <p class="owner"><a href="{% url 'saved_remove' post.id %}" class="save">сохранено</a></p>
+                {% else %}
+                <p class="owner"><a href="{% url 'saved_add' post.id %}" class="save">сохранить</a></p>
+                {% endif %}
                 {% if post.source_link %}
                 <a href="{{ post.source_link }}">Источник</a>
                 {% endif %}
@@ -21,6 +26,7 @@
                     {{ post.content|linebreaks }}
                 </div>
                 {% endif %}
+                {% if post.owner %}
                 <div class="container_owner">
                     <div class="owner">
                         <div class="owner_image">
@@ -33,6 +39,7 @@
                     </div>
                     <button class="sub">Подписаться</button>
                 </div>
+                {% endif %}
                 <div class="cats">
                     <ul>
                         {% for cat in post.cat.all %}

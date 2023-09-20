@@ -8,15 +8,15 @@ from django.contrib.auth import login, logout
 from django.urls import reverse_lazy
 from .models import Message, User
 from django.contrib.auth.mixins import LoginRequiredMixin
-from content.models import SavedImage
+from content.models import SavedImage, Content
 from django.shortcuts import get_object_or_404
 from django.contrib.auth import views as auth_views
+from django.db.models import OuterRef, Subquery
 
 
-class ProfileUser(DataMixin, ListView):
+class ProfileUser(LoginRequiredMixin, DataMixin, ListView):
     model = User
     template_name = 'users/profile.html'
-    login_url = reverse_lazy('index')
     slug_url_kwarg = 'username'
     context_object_name = 'user'
 
@@ -27,11 +27,15 @@ class ProfileUser(DataMixin, ListView):
         context = super().get_context_data(**kwargs)
         user = self.get_object()
         c_def = self.get_user_context()
-        saved_post = SavedImage.objects.filter(user__username=self.kwargs['username']).select_related('content')
-        context.update({'user': user})
-        context.update(c_def)
-        context.update({'saved_post': saved_post})
-        return context
+
+        saved_posts_user = Content.objects.filter(saved_images__user__username=self.kwargs['username'])
+        saved_current_user = []
+        if user.is_authenticated:
+            saved_current_user = Content.objects.filter(saved_images__user=self.request.user)
+
+        context.update({'user': user, 'saved_posts': saved_posts_user, 'saved_current': saved_current_user})
+
+        return dict(list(context.items()) + list(c_def.items()))
 
 
 class Messages(LoginRequiredMixin, DataMixin, ListView):

@@ -33,6 +33,10 @@
     font-weight: 500;
 }
 
+.interaction {
+    display: flex;
+}
+
 .change_profile {
     display: flex;
     align-items: center;
@@ -42,6 +46,7 @@
     background: darkgray;
     border-radius: 25px;
     cursor: pointer;
+    margin-left: 7px;
 }
 
 .change_profile:hover {

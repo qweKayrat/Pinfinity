@@ -6,8 +6,9 @@ urlpatterns = [
     path('login/', LoginUser.as_view(), name='login'),
     path('logout/', logout_user, name='logout'),
 
-    path('message/', Messages.as_view(), name='messages'),
     path('<slug:username>/', ProfileUser.as_view(), name='profile'),
+
+    path('message/', Messages.as_view(), name='messages'),
     path('chat/<slug:sender>/', Chat.as_view(), name='chat'),
 
 ]

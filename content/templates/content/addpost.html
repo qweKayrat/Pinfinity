@@ -8,8 +8,35 @@
     <form action="{% url 'add_post' %}" method="post" enctype="multipart/form-data" class="add_post">
         <h1>{{ title }}</h1>
         {% csrf_token %}
-        {{ form.as_p }}
+        <div class="add_image">
+            {{ form.image }}
+            <label for="{{ form.image.id_for_label }}" class="file-label">Выберите изображение</label>
+        </div>
+        <div class="add_field">
+            <label for="{{ form.title.id_for_label }}">{{ form.title.label }}</label>
+            {{ form.title }}
+        </div>
+        <div class="add_field">
+            <div class="toggle_content">
+                <label for="{{ form.content.id_for_label }}">Добавить описание</label>
+            </div>
+            <div class="add_content">
+                {{ form.content }}
+            </div>
+        </div>
+        <div class="add_field">
+            <label for="{{ form.source_link.id_for_label }}">{{ form.source_link.label }}</label>
+            {{ form.source_link }}
+        </div>
+        <div class="add_field last">
+            <p>Выберите теги</p>
+            <div class="cat_selected">
+                {{ form.cat }}
+            </div>
+        </div>
         <button class="add_btn">Добавить</button>
     </form>
 </div>
+
+<script src="{% static 'js/add_post.js' %}"></script>
 {% endblock %}

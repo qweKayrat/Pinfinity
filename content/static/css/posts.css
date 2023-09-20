@@ -16,6 +16,36 @@
     overflow: hidden;
 }
 
+.pict{
+    border-radius: 30px;
+    overflow: hidden;
+}
+
+.post_owner {
+    display: flex;
+    align-content: center;
+    flex-direction: row;
+    text-align: center;
+    padding: 5px 5px 5px 15px;
+    font-weight: 500;
+    font-size: 1em;
+    border-radius: 30px;
+    align-items: center;
+}
+
+
+.owner_image {
+    border-radius: 50%;
+    overflow: hidden;
+    height: 40px;
+    width: 40px;
+}
+
+.post_owner p{
+    margin-left: 10px;
+    color: #000;
+}
+
 
 .details {
     width: 100%;
@@ -247,42 +277,174 @@
 
 
 /*Форма добавления поста*/
-.add_post {
+.add {
     position: relative;
-    display: flex;
-    /* align-items: center; */
-    align-content: center;
-    flex-wrap: wrap;
-    flex-direction: column;
-}
-
-.form-input {
-    max-width: 1200px;
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
+    width: 800px;
+    /*height: 500px;*/
     background: transparent;
-    border: 3px solid #fff;
+    border: 2px solid rgba(255, 255, 255, .5);
     border-radius: 20px;
-    box-sizing: border-box;
+    box-shadow: 0 0 20px rgba(0, 0, 0, .5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin: 0 auto;
 }
 
+.add_post h1 {
+    text-align: center;
+    margin: 10px auto;
+    color: #178066;
+}
+
+.add_image {
+    position: relative;
+    display: inline-block;
+}
+
+.add_image input {
+    display: none;
+}
+
+/* Стили для кастомного лейбла */
+.file-label {
+    margin: 20px auto;
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #1fab89;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+/* Стили для hover-состояния лейбла */
+.file-label:hover {
+    background-color: #0056b3;
+}
+
+.add_field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.add_field label, .add_field p,
+.toggle_content {
+    font-size: 1em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.add_field .form-input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.toggle_content {
+    border-radius: 20px;
+    background: lightgray;
+    max-width: 300px;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.toggle_content.close {
+    border-radius: 0;
+    background: transparent;
+    text-align: left;
+    padding: 0;
+    cursor: none;
+}
+
+.add_content {
+    display: none;
+}
+
+.add_content.open {
+    display: block;
+}
+
+.add_field textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    /* Фиксированная высота и длина */
+    height: 100px; /* Замените на желаемую высоту */
+    width: 100%; /* Замените на желаемую ширину */
+    resize: none;
+}
+
+.add_field.last {
+    margin-bottom: 0;
+}
+
+/* Стили для элемента select */
+#id_cat {
+    /* Убираем стандартный стиль выпадающего списка */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    overflow: hidden;
+
+    /* Добавляем пользовательский фон и границу */
+    background-color: transparent;
+    border: none;
+    /* Делаем элемент с относительным позиционированием */
+    position: relative;
+    /* Устанавливаем минимальную ширину, чтобы было место для отображения option */
+    min-width: 100px; /* Замените на желаемую ширину */
+    /* Устанавливаем высоту элемента select */
+    height: auto;
+    max-height: 80px;
+    /* Задаем стили для текста внутри элемента select */
+    font-size: 14px; /* Замените на желаемый размер шрифта */
+    padding: 10px; /* Замените на желаемый внутренний отступ */
+    outline: none;
+}
+
+/* Стили для option внутри элемента select */
+#id_cat option {
+    /* Делаем option блочными элементами и выстраиваем их горизонтально */
+    display: block;
+    float: left;
+    /* Задаем внутренний отступ и отступ справа для option */
+    padding: 7px;
+    margin-right: 10px;
+
+    border: 1px solid #30ed11;
+    border-radius: 20px;
+    /* Устанавливаем курсор указателя при наведении на option */
+    cursor: pointer;
+    white-space: normal;
+}
+
+#id_cat option:checked {
+    background: #27dfac;
+}
+
+/* Очищаем стили для последнего option в списке, чтобы убрать отступ */
+select option:last-child {
+    margin-right: 0;
+}
 
 .add_btn {
-    background: #81d4fa;
-    border: 2px solid #264b5d;
+    border: none;
     width: 100%;
+    height: 50px;
+    text-align: center;
+    border-radius: 25px;
     padding: 10px;
-    font-size: 20px;
+    background: red;
+    color: #fff;
+    font-size: 1.2em;
+    margin: 0 auto 20px;
     cursor: pointer;
-    border-radius: 40px;
-    max-width: 1200px;
 }
-
-form label {
-    font-size: 18px;
-}
-
 
 @media (max-width: 992px) {
     .main {
