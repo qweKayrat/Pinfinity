@@ -26,10 +26,14 @@
 
 .message {
     display: flex;
-    background: green;
+    background: #c8ffec;
     margin-bottom: 10px;
     border: 2px solid #000;
     border-radius: 20px;
+}
+
+.message--unread{
+    background: red;
 }
 
 .sender_image {
@@ -42,6 +46,10 @@
 
 .message_text {
     width: 100%;
+}
+.message_text > * {
+    font-size: 1.2em;
+    color: #d500ff;
 }
 
 .header_message {
@@ -63,9 +71,81 @@
     margin-left: 30px;
 }
 
-/* Чат */
+
+/* Страница чата */
+.content_post {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    height: 89vh;
+    width: 70%;
+    margin: 0 auto;
+    position: relative;
+    background: #c8ffec;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.1) 15px 8px 8px 18px;
+}
+
+.content_post h1{
+    width: 100%;
+    text-align: center;
+    padding-left: 20px;
+    font-size: 1.7em;
+    border-bottom: 1px solid #178066;
+}
+
+.chat {
+    overflow: auto;
+    margin-top: auto;
+    margin-bottom: 50px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.mess {
+    margin: 10px;
+    background: #27dfac;
+    padding: 10px;
+    width: 350px;
+    word-wrap: break-word;
+}
+
+.right {
+    margin-left: auto;
+    border-radius: 30px 30px 0 30px;
+}
 
 
+.left {
+    margin-right: auto;
+    border-radius: 30px 30px 30px 0;
+}
+
+#message-form {
+    display: flex;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    background: #eefcf0;
+}
+
+.message_input {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    height: 50px;
+    width: 100%;
+    font-size: 1.2em;
+}
+
+
+button{
+    width: 50px;
+    border: 1px solid #27dfac;
+    border-radius: 10px;
+}
 
 
 

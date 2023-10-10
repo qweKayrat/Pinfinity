@@ -4,6 +4,7 @@
     padding: 0 20px;
     column-gap: 10px;
     columns: 6;
+    /*column-fill: balance;*/
 }
 
 
@@ -16,7 +17,7 @@
     overflow: hidden;
 }
 
-.pict{
+.pict {
     border-radius: 30px;
     overflow: hidden;
 }
@@ -34,14 +35,7 @@
 }
 
 
-.owner_image {
-    border-radius: 50%;
-    overflow: hidden;
-    height: 40px;
-    width: 40px;
-}
-
-.post_owner p{
+.post_owner p {
     margin-left: 10px;
     color: #000;
 }
@@ -53,16 +47,16 @@
     top: 0;
     right: -100%;
     position: absolute;
-    background: #1f3d4738;
-    backdrop-filter: blur(5px);
-    border-radius: 15px;
+    /*background: #1f3d4738;*/
+    /*backdrop-filter: blur(5px);*/
+    border-radius: 30px;
     color: #fff;
     padding: 20px;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
     justify-content: space-between;
-    transition: 1s;
+    /*transition: 1s;*/
     cursor: pointer;
 }
 
@@ -79,14 +73,14 @@
     font-weight: 600;
 }
 
-.details p.owner {
-    text-transform: capitalize;
-    font-weight: 400;
+.details .save_btn {
     padding-bottom: 10px;
     position: absolute;
-    bottom: 5px;
+    bottom: 60px;
     right: 10px;
-    z-index: 1000000;
+    height: 40px;
+    width: 120px;
+    font-size: 0.9em;
 }
 
 /* Категории */
@@ -107,6 +101,14 @@
 
 .catbar .toggle_cat {
     cursor: pointer;
+    display: inline-block;
+    width: 30px;
+    height: 100%;
+}
+
+.catbar .toggle_cat:hover {
+    border-radius: 50%;
+    background: #ccc;
 }
 
 .catbar h2 a {
@@ -136,11 +138,7 @@
     align-items: center;
     flex-wrap: wrap;
     flex-direction: row;
-
-    /*width: 320px;*/
     margin: 20px 70px 0;
-    /*margin-right: 40px;*/
-    /*margin-top: 20px;*/
 }
 
 .midbar ul li {
@@ -185,8 +183,43 @@
 }
 
 /*Страница Поста */
+
+/* Кнопки подписки */
+.btn {
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    border-radius: 30px;
+    text-transform: uppercase;
+    font-size: 0.9em;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #fff;
+}
+
+.change {
+    background: #ccc;
+}
+
+.mes {
+    background: #27dfac;
+}
+
+.sub {
+    background: #27dfac;
+}
+
+.unsub {
+    background: #19624d;
+}
+
+.unsub:hover, .sub:hover {
+    background: lightseagreen;
+}
+
 .wrap_post {
-    /*max-height: 890px;*/
     display: flex;
     justify-content: center;
 }
@@ -194,59 +227,107 @@
 .content_post {
     max-width: 1000px;
     box-shadow: rgba(0, 0, 0, 0.5) 0 1px 20px 0;
-    border-radius: 32px;
-    /*height: 700px;*/
-    height: 600px;
+    border-radius: 40px;
 }
 
 .post {
-    max-width: 1000px;
+    position: relative;
+    width: 1000px;
+    min-height: 500px;
     margin: 0 auto;
     display: flex;
-    justify-content: center;
-    /*align-items: center;*/
+}
+
+
+.post_image {
+    display: flex;
+    flex: 40%;
 }
 
 .post_image .image {
-    /*max-height: 650px;*/
-    /*max-width: 600px;*/
-    max-height: 550px;
+    max-height: 650px;
     max-width: 500px;
     float: left;
-    border-radius: 40px;
-    overflow: hidden;
-    margin: 20px;
+    border-radius: 40px 0 0 40px;
 }
 
+
 .post_text {
-    /*height: 600px;*/
-    width: 400px;
-    margin: 50px;
-    overflow: auto;
+    margin: 30px;
+    /*overflow: auto;*/
     word-wrap: break-word;
     position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    /*justify-content: space-evenly;*/
+    flex: 50%;
+    padding-bottom: 40px;
+    max-height: 650px;
+    overflow-y: auto;
+}
+
+
+.save_post {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 140px;
+    height: 44px;
+}
+
+.btn.saved {
+    background: #000;
+}
+
+.save {
+    background: red;
+}
+
+.more_info {
+    margin-top: 40px;
+}
+
+.post_content {
+}
+
+.text_content {
+    font-size: 1.1em;
+    font-weight: 500;
+    color: #1fab89;
+    margin-bottom: 10px;
+}
+
+.post_content p:last-of-type {
+    padding-left: 10px;
+    user-select: text;
 }
 
 .container_owner {
+    height: 80px;
     display: flex;
     align-items: center;
     border-radius: 20px;
     background: #ffeeff;
     justify-content: space-between;
+    margin: 40px 0;
 }
 
 .owner {
+    margin-left: 7px;
     display: flex;
     align-items: center;
     border-radius: 20px;
 }
 
+.owner.knop {
+    margin-right: 7px;
+    height: 50px;
+    width: 180px;
+}
+
 .owner_image {
-    max-height: 80px;
-    max-width: 80px;
+    max-height: 50px;
+    max-width: 50px;
     float: left;
     border-radius: 50%;
     overflow: hidden;
@@ -258,16 +339,6 @@
     flex-direction: column;
 }
 
-.save {
-    text-align: center;
-    padding: 5px;
-    font-weight: 600;
-    font-size: 1em;
-    border-radius: 30px;
-    background: #178066;
-    height: 30px;
-    width: 120px;
-}
 
 .container_owner button {
     background: red;
@@ -275,6 +346,112 @@
     height: 50px;
 }
 
+.cats {
+    margin-bottom: 20px;
+}
+
+.cats ul {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.cats ul li {
+    margin-left: 7px;
+}
+
+.current_user {
+    max-height: 50px;
+    max-width: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 6px;
+}
+
+.form_comment {
+    padding: 10px 20px 10px 0;
+    width: 55%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: #eefcf0;
+    border-bottom-right-radius: 40px;
+}
+
+.form_field {
+    width: 100%;
+    /*position: absolute;*/
+    /*bottom: 0;*/
+    display: flex;
+    align-items: center;
+}
+
+.comment_input {
+    padding: 10px;
+    border-radius: 30px;
+    border: 1px solid #ccc;
+    height: 50px;
+    width: 100%;
+    font-size: 1.2em;
+}
+
+.commentList {
+    /*max-height: 200px;*/
+    /*overflow-y: auto;*/
+}
+
+.comment {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px 10px;
+    padding: 3px;
+    border-bottom: 1px solid #5cda5d42;
+}
+
+.comment_owner {
+    max-height: 40px;
+    max-width: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 6px;
+}
+
+.comment_details {
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+}
+
+.comment_author {
+    font-size: 1em;
+    font-weight: 600;
+    margin: 5px 10px 0 5px;
+}
+
+.comment_body {
+    word-break: break-word;
+    font-size: 0.9em;
+}
+
+.icon-like {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 60px;
+    right: 55px;
+    font-weight: 600;
+    font-size: 0.95em;
+}
+
+
+.icn-like {
+    /*color: #fff;*/
+    font-size: 2.2em;
+    margin-left: 10px;
+}
+
+.fa-solid.icn-like {
+    color: red;
+}
 
 /*Форма добавления поста*/
 .add {
@@ -293,6 +470,7 @@
 }
 
 .add_post h1 {
+    padding-top: 20px;
     text-align: center;
     margin: 10px auto;
     color: #178066;

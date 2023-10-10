@@ -40,12 +40,54 @@ class User(AbstractUser):
         return reverse('profile', kwargs={'username': self.username})
 
 
+class SubsManager(models.Manager):
+    def count_subscriptions(self, user):
+        return self.filter(subscriber=user).count()  # количество подписок юзером
+
+    def count_subscribers(self, user):
+        return self.filter(target_user=user).count()  # количество подписок на юзера
+
+    def is_subscriber(self, user, target_user):
+        return self.filter(subscriber=user, target_user=target_user).exists()
+
+
+class Subscription(models.Model):
+    subscriber = models.ForeignKey(User, on_delete=models.CASCADE, related_name='subscriptions', verbose_name='Подписчик')
+    target_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='subscribers',
+                                    verbose_name='Целевой пользователь')
+    created = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
+    objects = SubsManager()
+
+    class Meta:
+        unique_together = ('subscriber', 'target_user')  # Уникальная пара (подписчик, целевой пользователь)
+        verbose_name = 'подписчик'
+        verbose_name_plural = 'Подписчик'
+
+    def __str__(self):
+        return f'{self.subscriber.username} подписан на {self.target_user.username}'
+
+
+class MessageManager(models.Manager):
+    def mark_messages_as_read(self, sender, recipient):
+        # Получите все сообщения от sender к recipient, которые еще не прочитаны
+        unread_messages = self.filter(sender=sender, recipient=recipient, is_read=False)
+
+        # Обновите их, устанавливая is_read в True
+        unread_messages.update(is_read=True)
+
+    def count_unread_messages(self, recipient):
+        return self.filter(recipient=recipient, is_read=False).count()
+
+
 class Message(models.Model):
     sender = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
     recipient = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True, related_name="messages")
     body = models.TextField()
+    image = models.ImageField(upload_to=f'Chat/{sender}/&Y/%m/%d/', blank=True, verbose_name='Изображение от пользователя')
     is_read = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
+
+    objects = MessageManager()
 
     def __str__(self):
         return f"{self.sender}"
@@ -53,7 +95,7 @@ class Message(models.Model):
     class Meta:
         verbose_name = "сообщение"
         verbose_name_plural = 'Сообщения'
-        ordering = ['is_read', '-created']
+        ordering = ['created']
 
     def get_absolute_url(self):
-        return reverse('profile', kwargs={'sender': self.sender})
+        return reverse('chat', kwargs={'sender': self.sender})

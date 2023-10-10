@@ -16,18 +16,27 @@
     {% else %}
     <div class="name">Имя: Инкогнито</div>
     {% endif %}
-    <div class="subs">0 подписок</div>
+    {% if user.source_link %}
+    <div class="name">
+        <a href="{{ user.source_link }}">Ссылка на контент пользователя</a>
+    </div>
+    {% endif %}
+    <div class="subs">{{ subscribers_count }} подписчиков</div>
     {% if user == request.user %}
     <div class="change_profile">
-        <a href="#">Изменить профиль</a>
+        <a href="{% url 'edit-profile' %}" class="btn change">изменить профиль</a>
     </div>
     {% else %}
     <div class="interaction">
-        <div class="change_profile">
-            <a href="#">Написать</a>
+        <div class="change_profile knop">
+            <a href="{% url 'chat' user.username %}" class="btn mes">написать</a>
         </div>
-        <div class="change_profile">
-            <a href="#">Подписаться</a>
+        <div class="change_profile knop">
+            {% if is_subscriber %}
+            <a href="{% url 'unsubscribe' user.username %}" class="btn unsub">отписаться</a>
+            {% else %}
+            <a href="{% url 'subscribe' user.username %}" class="btn sub">подписаться</a>
+            {% endif %}
         </div>
     </div>
     {% endif %}
@@ -59,20 +68,18 @@
                     </a>
                 </div>
                 <div class="post_owner">
-                        <img src="{{ post.owner.img.url }}" alt="image {{ post.owner.username }}" class="owner_image">
-                        <p>{{ post.owner.username }}</p>
+                    <img src="{{ post.owner.img.url }}" alt="image {{ post.owner.username }}" class="owner_image">
+                    <p>{{ post.owner.username }}</p>
                 </div>
                 <div class="details" onclick="window.location='{{ post.get_absolute_url }}'">
-                    <a href="{{ post.get_absolute_url }}"><h2>{{ post.title|linebreaks|truncatewords:20 }}</h2></a>
-                    {% if post in saved_current %}
-                    <p class="owner">
-                        <a href="{% url 'saved_remove' post.id %}" class="save">сохранено</a>
-                    </p>
-                    {% else %}
-                    <p class="owner">
-                        <a href="{% url 'saved_add' post.id %}" class="save">сохранить</a>
-                    </p>
-                    {% endif %}
+                    <h2>{{ post.title|linebreaks|truncatewords:20 }}</h2>
+                    <div class="save_btn">
+                        {% if post in saved_current %}
+                        <a href="{% url 'saved_remove' post.id %}" class="btn saved">сохранено</a>
+                        {% else %}
+                        <a href="{% url 'saved_add' post.id %}" class="btn save">сохранить</a>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
             {% endfor %}
@@ -105,18 +112,14 @@
                     <p>{{ post.owner.username }}</p>
                 </div>
                 <div class="details" onclick="window.location='{{ post.get_absolute_url }}'">
-                    <a href="{{ post.get_absolute_url }}">
-                        <h2>{{ post.title|linebreaks|truncatewords:20 }}</h2>
-                    </a>
-                    {% if post in saved_current %}
-                    <p class="owner">
-                        <a href="{% url 'saved_remove' post.id %}" class="save">сохранено</a>
-                    </p>
-                    {% else %}
-                    <p class="owner">
-                        <a href="{% url 'saved_add' post.id %}" class="save">сохранить</a>
-                    </p>
-                    {% endif %}
+                    <h2>{{ post.title|linebreaks|truncatewords:20 }}</h2>
+                    <div class="save_btn">
+                        {% if post in saved_current %}
+                        <a href="{% url 'saved_remove' post.id %}" class="btn saved">сохранено</a>
+                        {% else %}
+                        <a href="{% url 'saved_add' post.id %}" class="btn save">сохранить</a>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
             {% endfor %}

@@ -7,28 +7,53 @@
 <div class="faq">
     <div class="sidebar">
         <ul>
-            {% for q in questions %}
-            {% if q.pk == selected %}
+            {% for a in answers %}
+            {% if a.pk == selected %}
             <li class="list-group selected">
-                <p class="list-group-item">{{ q.title }}</p>
+                <p class="list-group-item">{{ a.title }}</p>
             </li>
             {% else %}
-            <li class="list-group"><a href="{% url 'questions' q.id %}" class="list-group-item">{{ q.title }}</a></li>
+            <li class="list-group"><a href="{% url 'answers' a.id %}" class="list-group-item">{{ a.title }}</a></li>
             {% endif %}
             {% endfor %}
-            <li class="list-group"><a href="{% url 'faq' %}" class="list-group-item add_questions">Задать вопрос</a></li>
+            <li class="list-group"><a href="{% url 'ask' %}" class="list-group-item add_questions">Задать вопрос</a></li>
         </ul>
     </div>
     <div class="faq_text">
-        {% for q in questions %}
-        {% if q.pk == selected %}
+        {% for a in answers %}
+        {% if a.pk == selected %}
         <div class="faq_content selected">
         {% else %}
         <div class="faq_content">
         {% endif %}
-            <p>{{ q.content|safe }}</p>
+        {{ a.body|safe }}
         </div>
         {% endfor %}
+        {% if ask %}
+        <div class="add">
+            <form action="{% url 'ask' %}" method="post" class="add_question">
+                <h1>{{ title }}</h1>
+                {% csrf_token %}
+                <div class="add_field">
+                    <label for="{{ form.type.id_for_label }}">{{ form.type.label }}</label>
+                    {{ form.type }}
+                </div>
+                <div class="add_field">
+                    <label for="{{ form.title.id_for_label }}">{{ form.title.label }}</label>
+                    {{ form.title }}
+                </div>
+                <div class="add_field">
+                    <label for="{{ form.body.id_for_label }}">{{ form.body.label }}</label>
+                    {{ form.body }}
+                </div>
+                <div class="add_field">
+                    <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+                    {{ form.email }}
+                </div>
+                <button class="add_btn">Отправить</button>
+            </form>
+        </div>
+        {% endif %}
         </div>
     </div>
     {% endblock content %}

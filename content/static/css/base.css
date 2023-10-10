@@ -8,7 +8,7 @@
 
 body {
     height: 100vh;
-    /*background: #eefcf0;*/
+    background: #eefcf0;
 }
 
 *, ::after, ::before {
@@ -19,16 +19,18 @@ li {
     list-style: none;
 }
 
-a {
-    text-decoration: none;
-    color: #30ed11;
+.links a {
     font-size: 1.1rem;
-    font-weight: 500;
 }
 
+a {
+    text-decoration: none;
+    font-weight: 500;
+    color: #24b87b;
+}
 
 a:hover {
-    color: white;
+    color: #1fab89;
 }
 
 .content {
@@ -37,7 +39,8 @@ a:hover {
 
 .image {
     width: 100%;
-    object-fit: cover;
+    /*object-fit: cover;*/
+    object-fit: unset;
 }
 
 /* Navbar */
@@ -49,6 +52,7 @@ header {
 }
 
 .navbar {
+    overflow: hidden;
     position: fixed;
     width: 100%;
     height: 65px;
@@ -56,7 +60,9 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+    /*background: #fff;*/
     background: #eefcf0;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 8px 8px -8px;
 }
 
 
@@ -143,7 +149,7 @@ header {
     font-size: 2rem;
     cursor: pointer;
     max-height: 40px;
-    max-width: 40px;
+    max-width: 46px;
     border-radius: 50%;
     overflow: hidden;
 }
@@ -312,3 +318,27 @@ header {
     cursor: pointer;
     border-radius: 50%;
 }
+
+
+.alert {
+    top: 70px;
+    position: absolute;
+    z-index: 100000;
+    padding: 10px;
+    border-radius: 30px;
+    border: 1px solid;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #95f5d3;
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
+}
+
+.message_close {
+    margin-left: 7px;
+    height: 30px;
+    width: 30px;
+    border: none;
+    border-radius: 35px;
+}
+

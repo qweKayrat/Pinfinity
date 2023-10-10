@@ -1,19 +1,29 @@
 {% extends 'content/base.html' %}
 {% load static %}
 {% block css %}
-<link href="{% static 'css/message.css' %}" rel="stylesheet">
+<link href="{% static 'css/messages.css' %}" rel="stylesheet">
 {% endblock css %}
 {% block content %}
 <div class="wrap_post">
     <div class="content_post">
-        <h1>Чат с пользователем {{ recipient.username }}</h1>
+        <h1>Чат с пользователем {{ sender }}</h1>
         <div class="chat">
+            {% for mes in message %}
+            {% if mes.sender == request.user %}
+            <div class="mess right">
+            {% else %}
+            <div class="mess left">
+            {% endif %}
+                {{ mes.body }}
+            </div>
+            {% endfor %}
         </div>
-        <form id="message-form" method="post">
+        <form action="{% url 'add-message' sender %}" enctype="multipart/form-data" id="message-form" method="post">
             {% csrf_token %}
-            <input type="text" name="content">
-            <input type="submit" value="Отправить">
+            {{ form.body }}
+            <button><i class="fa-solid fa-paper-plane"></i></button>
         </form>
     </div>
 </div>
+<script src="{% static 'js/ajax.js' %}"></script>
 {% endblock %}

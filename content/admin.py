@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import *
+from .models import Content, Review, Category, Questions, Answers
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from django import forms
 
@@ -14,13 +14,13 @@ class ContentAdmin(admin.ModelAdmin):
     list_display_links = ('id', 'title',)
     # ссылки для редактировния в admin
 
-    search_fields = ('title', 'content', 'owner')
+    search_fields = ('id', 'title')
     # поиск по полям в admin
 
     readonly_fields = ('time_created', 'time_updated')
     # отображение полей в admin без возможности редактирования
 
-    list_filter = ('title', 'time_created',)
+    list_filter = ('cat', 'time_created',)
     # фильтрация полей в admin панели
 
 
@@ -31,21 +31,21 @@ class CategoryAdmin(admin.ModelAdmin):
     search_fields = ('name',)
 
 
-class QuestionsAdminForm(forms.ModelForm):
-    content = forms.CharField(widget=CKEditorUploadingWidget)
+class AnswersAdminForm(forms.ModelForm):
+    body = forms.CharField(widget=CKEditorUploadingWidget)
 
     class Meta:
         model = Questions
         fields = '__all__'
 
 
-class QuestionsAdmin(admin.ModelAdmin):
-    form = QuestionsAdminForm
+class AnswersAdmin(admin.ModelAdmin):
+    form = AnswersAdminForm
     list_display = ("id", "title", 'time_created', 'time_updated', 'is_published')
     # вывод полей в admin
     list_display_links = ('id', 'title',)
     # ссылки для редактировния в admin
-    search_fields = ('title', 'content')
+    search_fields = ('title', 'body')
     # поиск по полям в admin
     readonly_fields = ('time_created', 'time_updated')
     # отображение полей в admin без возможности редактирования
@@ -53,10 +53,29 @@ class QuestionsAdmin(admin.ModelAdmin):
     # редактирование полей со стороны admin панели
     list_filter = ('time_created', 'is_published',)
     # фильтрация полей в admin панели
-    fields = ('title', 'content', 'time_created', 'time_updated', 'is_published',)
+    fields = ('title', 'body', 'time_created', 'time_updated', 'is_published',)
+    save_on_top = True
+
+
+class QuestionsAdmin(admin.ModelAdmin):
+    list_display = ("id", "title", 'type', 'time_created', 'is_answered')
+    # вывод полей в admin
+    list_display_links = ('id', 'type', 'title',)
+    # ссылки для редактировния в admin
+    search_fields = ('title', 'body', 'type')
+    # поиск по полям в admin
+    readonly_fields = ('time_created',)
+    # отображение полей в admin без возможности редактирования
+    list_editable = ('is_answered',)
+    # редактирование полей со стороны admin панели
+    list_filter = ('time_created', 'is_answered',)
+    # фильтрация полей в admin панели
+    fields = ('title', 'body', 'type', 'time_created', 'is_answered',)
     save_on_top = True
 
 
 admin.site.register(Content, ContentAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Questions, QuestionsAdmin)
+admin.site.register(Answers, AnswersAdmin)
+admin.site.register(Review)

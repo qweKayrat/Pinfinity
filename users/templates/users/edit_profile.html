@@ -1,0 +1,42 @@
+{% extends 'content/base.html' %}
+{% load static %}
+{% block css %}
+<link href="{% static 'css/profile.css' %}" rel="stylesheet">
+{% endblock css %}
+{% block content %}
+<div class="edit">
+    <form action="{% url 'edit-profile' %}" method="post" class="add_post" enctype="multipart/form-data">
+        <div class="first">
+            <div class="user_image">
+                <img src="{{ user.img.url }}" alt="{{ user.username }}" class="image">
+            </div>
+            <label for="{{ form.img.id_for_label }}" class="file-label">Выберите изображение</label>
+            <div class="add_image">
+                {{ form.img }}
+            </div>
+        </div>
+        <div class="second">
+            <h1>{{ title }}</h1>
+            {% csrf_token %}
+            <div class="add_field">
+                <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
+                {{ form.username }}
+            </div>
+            <div class="add_field">
+                <label for="{{ form.first_name.id_for_label }}">{{ form.first_name.label }}</label>
+                {{ form.first_name }}
+            </div>
+            <div class="add_field">
+                <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+                {{ form.email }}
+            </div>
+            <div class="add_field">
+                <label for="{{ form.source_link.id_for_label }}">{{ form.source_link.label }}</label>
+                {{ form.source_link }}
+            </div>
+        </div>
+        <button class="add_btn">Сохранить</button>
+    </form>
+</div>
+
+{% endblock content %}

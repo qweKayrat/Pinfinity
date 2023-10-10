@@ -46,18 +46,23 @@
             </a>
         </div>
         <div class="post_owner">
-                <img src="{{ post.owner.img.url }}" alt="image {{ post.owner.username }}" class="owner_image">
-                <p>{{ post.owner.username }}</p>
+            <img src="{{ post.owner.img.url }}" alt="image {{ post.owner.username }}" class="owner_image">
+            <p>{{ post.owner.username }}</p>
         </div>
         <div class="details" onclick="window.location='{{ post.get_absolute_url }}'">
-            <a href="{{ post.get_absolute_url }}"><h2>{{ post.title|linebreaks|truncatewords:20 }}</h2></a>
-            {% if post.saved %}
-            <p class="owner"><a href="{% url 'saved_remove' post.id %}" class="save">сохранено</a></p>
-            {% else %}
-            <p class="owner"><a href="{% url 'saved_add' post.id %}" class="save">сохранить</a></p>
-            {% endif %}
+            <h2>{{ post.title|linebreaks|truncatewords:20 }}</h2>
+            <div class="save_btn">
+                {% if post.saved %}
+                <a href="{% url 'saved_remove' post.id %}" class="btn saved">сохранено</a>
+                {% else %}
+                <a href="{% url 'saved_add' post.id %}" class="btn save">сохранить</a>
+                {% endif %}
+            </div>
         </div>
     </div>
     {% endfor %}
 </div>
+<div class="loading-trigger"></div>
+<!--<script src="{% static 'js/ajax.js' %}"></script>-->
 {% endblock content %}
+

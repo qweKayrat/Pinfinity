@@ -8,10 +8,8 @@ full_menu = [
     {'title': "Главная", 'url_name': 'index'},
     {'title': "Создать", 'url_name': 'add_post'},
     {'title': "FAQ", 'url_name': 'faq'},
-    # {'title': "Сообщения", 'url_name': 'index'},
     {'title': "Сообщения", 'url_name': 'messages'},
     {'title': "Аккаунт", 'url_name': 'profile'},
-    # {'title': "Аккаунт", 'url_name': 'index'},
     {'title': "Выйти", 'url_name': 'logout'},
 ]
 
@@ -23,7 +21,7 @@ limited_menu = [
 
 
 class DataMixin:
-    paginate_by = 19
+    paginate_by = 20
 
     def get_user_context(self, **kwargs):
         context = kwargs

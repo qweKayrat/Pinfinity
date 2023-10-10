@@ -11,65 +11,103 @@
                 <img src="{{ post.image.url }}" alt="image {{ post.title }}" class="image">
             </div>
             <div class="post_text">
-                {% if post.saved %}
-                <p class="owner"><a href="{% url 'saved_remove' post.id %}" class="save">сохранено</a></p>
-                {% else %}
-                <p class="owner"><a href="{% url 'saved_add' post.id %}" class="save">сохранить</a></p>
-                {% endif %}
-                {% if post.source_link %}
-                <a href="{{ post.source_link }}">Источник</a>
-                {% endif %}
-                <h1>{{ post.title }}</h1>
-                {% if post.content %}
-                <div class="post_text">
-                    <p>Описание</p>
-                    {{ post.content|linebreaks }}
+                <div class="save_btn save_post">
+                    {% if post.saved %}
+                    <a href="{% url 'saved_remove' post.id %}" class="btn saved">сохранено</a>
+                    {% else %}
+                    <a href="{% url 'saved_add' post.id %}" class="btn save">сохранить</a>
+                    {% endif %}
                 </div>
-                {% endif %}
+                <div class="more_info">
+                    {% if post.source_link %}
+                    <a href="{{ post.source_link }}">Источник</a>
+                    {% endif %}
+                    {% if post.content %}
+                    <div class="post_content">
+                        <p class="text_content">Описание</p>
+                        {{ post.content|linebreaks }}
+                    </div>
+                    {% endif %}
+                </div>
                 {% if post.owner %}
                 <div class="container_owner">
                     <div class="owner">
                         <div class="owner_image">
-                            <img src="{{ post.owner.img.url }}" alt="image {{ post.owner.username }}" class="image">
+                            <a href="{% url 'profile' post.owner.username %}">
+                                <img src="{{ post.owner.img.url }}" alt="image {{ post.owner.username }}" class="image"></a>
                         </div>
                         <div class="owner_info">
                             <a href="{% url 'profile' post.owner.username %}">{{ post.owner.username }}</a>
-                            <p>6500 Подписчик</p>
+                            <p>{{ subscribers_count }} подписчик</p>
                         </div>
                     </div>
-                    <button class="sub">Подписаться</button>
+                    {% if is_subscriber %}
+                    <div class="owner knop">
+                        <a href="{% url 'unsubscribe' post.owner.username %}" class="btn unsub">отписаться</a>
+                    </div>
+                    {% else %}
+                    <div class="owner knop">
+                        <a href="{% url 'subscribe' post.owner.username %}" class="btn sub">подписаться</a>
+                    </div>
+                    {% endif %}
                 </div>
                 {% endif %}
                 <div class="cats">
+                    <p class="text_content">Тэги</p>
                     <ul>
                         {% for cat in post.cat.all %}
                         <li>
-                            <a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
+                            <a href="{{ cat.get_absolute_url }}">#{{ cat.name }}</a>
                         </li>
                         {% endfor %}
                     </ul>
                 </div>
-                <p>Комментарии:</p>
+
+                <div class="commentList">
+                    <p class="text_content">Комментарии:</p>
+                    {% if not post.review_set.all %}
+                    <p>Здесь пока пусто</p>
+                    {% endif %}
+                    {% for comment in post.review_set.all %}
+                    <div class="comment">
+                        <div class="comment_owner">
+                            <a href="{% url 'profile' comment.owner.username %}">
+                                <img class="image" src="{{ comment.owner.img.url }}" alt="image {{ comment.owner.username }}"/>
+                            </a>
+                        </div>
+                        <a href="{% url 'profile' comment.owner.username %}" class="comment_author">
+                            {{ comment.owner.username }}</a>
+                        <div class="comment_details">
+                            <p class="comment_body">{{ comment.body|linebreaksbr }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+            <div class="form_comment">
+                <span class="icon-like">
+                    <p>{{ post.likes }}</p>
+                    {% if post.liked %}
+                    <a href="{% url 'remove-like' post.id %}"><i class="fa-solid fa-heart icn-like"></i></a>
+                    {% else %}
+                    <a href="{% url 'like' post.id %}"><i class="fa-regular fa-heart icn-like"></i></a>
+                    {% endif %}
+                </span>
+                <form action="{% url 'comment' post.slug %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form_field">
+                        {% if request.user.is_authenticated %}
+                        <div class="current_user">
+                            <img src="{{ user.img.url }}" alt="image {{ user.username }}" class="image">
+                        </div>
+                        {% endif %}
+                        {{ form_comment.body }}
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
-<!--<div class="other_content">-->
-<!--    <p>Похожие</p>-->
-<!--    {% for p in cats.content.all %}-->
-<!--    {% if p.category == post.category %}-->
-<!--    <div class="card">-->
-<!--        <a href="{{ p.get_absolute_url }}">-->
-<!--            <div class="pict">-->
-<!--                <img src="{{ p.image.url }}" alt="image {{ p.title }}" class="image">-->
-<!--            </div>-->
-<!--        </a>-->
-<!--        <div class="details">-->
-<!--            <a href="{{ post.get_absolute_url }}"><h2>{{ p.title|linebreaks|truncatewords:20 }}</h2></a>-->
-<!--            <p class="owner">author: <a href="#">{{ p.owner }}</a></p>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    {% endif %}-->
-<!--    {% endfor %}-->
-<!--</div>-->
+
 {% endblock %}
