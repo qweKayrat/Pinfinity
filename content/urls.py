@@ -1,13 +1,15 @@
 from django.urls import path
 from .views import ContentHome, ShowPost, ContentCategory, \
     AddPost, FAQ, SelectAnswer, saved_add, saved_remove, \
-    AddComment, AskQuestions, like, remove_like
+    AddComment, AskQuestions, like, remove_like, delete_post
 
 urlpatterns = [
     path('', ContentHome.as_view(), name='index'),
     path('post/<slug:post_slug>/', ShowPost.as_view(), name='post'),
     path('category/<slug:cat_slug>/', ContentCategory.as_view(), name='category'),
-    path('addpage/', AddPost.as_view(), name='add_post'),
+
+    path('addpost/', AddPost.as_view(), name='add_post'),
+    path('delete-post/<int:image_id>/', delete_post, name='delete_post'),
 
     path('saved-add/<int:image_id>/', saved_add, name='saved_add'),
     path('saved-remove/<int:image_id>/', saved_remove, name='saved_remove'),

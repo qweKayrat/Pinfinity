@@ -6,6 +6,14 @@
 {% endblock css %}
 {% block content %}
 
+{% if previous_page %}
+<div class="previous_page">
+    <a href="{{ previous_page }}" class="prev_page">
+        <i class="fa-solid fa-arrow-left"></i>
+    </a>
+</div>
+{% endif %}
+
 <div class="user">
     <div class="user_image">
         <img src="{{ user.img.url }}" alt="{{ user.username }}" class="image">
@@ -18,7 +26,7 @@
     {% endif %}
     {% if user.source_link %}
     <div class="name">
-        <a href="{{ user.source_link }}">Ссылка на контент пользователя</a>
+        <a href="{{ user.source_link }}" target="_blank">Ссылка на контент пользователя</a>
     </div>
     {% endif %}
     <div class="subs">{{ subscribers_count }} подписчиков</div>

@@ -77,9 +77,7 @@
     padding-bottom: 10px;
     position: absolute;
     bottom: 60px;
-    right: 10px;
-    height: 40px;
-    width: 120px;
+    right: 5px;
     font-size: 0.9em;
 }
 
@@ -138,7 +136,7 @@
     align-items: center;
     flex-wrap: wrap;
     flex-direction: row;
-    margin: 20px 70px 0;
+    margin-top: 10px;
 }
 
 .midbar ul li {
@@ -186,8 +184,8 @@
 
 /* Кнопки подписки */
 .btn {
-    height: 100%;
-    width: 100%;
+    /*height: 100%;*/
+    /*width: 100%;*/
     align-items: center;
     justify-content: center;
     display: flex;
@@ -199,12 +197,26 @@
     color: #fff;
 }
 
+
 .change {
+    width: 230px;
+    height: 50px;
     background: #ccc;
+}
+.change:hover {
+    background: lightsalmon;
 }
 
 .mes {
+    width: 180px;
+    height: 50px;
     background: #27dfac;
+}
+
+.sub,
+.unsub {
+    height: 50px;
+    width: 180px;
 }
 
 .sub {
@@ -215,8 +227,8 @@
     background: #19624d;
 }
 
-.unsub:hover, .sub:hover {
-    background: lightseagreen;
+.unsub:hover, .sub:hover, .mes:hover {
+    background: lightpink;
 }
 
 .wrap_post {
@@ -254,12 +266,10 @@
 
 .post_text {
     margin: 30px;
-    /*overflow: auto;*/
     word-wrap: break-word;
     position: relative;
     display: flex;
     flex-direction: column;
-    /*justify-content: space-evenly;*/
     flex: 50%;
     padding-bottom: 40px;
     max-height: 650px;
@@ -271,8 +281,19 @@
     position: absolute;
     right: 0;
     top: 0;
-    width: 140px;
+    display: flex;
+}
+
+
+.more_info {
+    margin-top: 40px;
+}
+
+.remove_post,
+.save,
+.btn.saved {
     height: 44px;
+    width: 140px;
 }
 
 .btn.saved {
@@ -283,12 +304,15 @@
     background: red;
 }
 
-.more_info {
-    margin-top: 40px;
+.remove_post {
+    background: #ccc;
+    margin-right: 10px;
 }
 
-.post_content {
+.remove_post:hover {
+    background: #807e7e;
 }
+
 
 .text_content {
     font-size: 1.1em;
@@ -624,16 +648,65 @@ select option:last-child {
     cursor: pointer;
 }
 
-@media (max-width: 992px) {
-    .main {
+
+.previous_page {
+    text-align: center;
+    padding: 3px;
+    border-radius: 50%;
+    width: 40px;
+    top: 100px;
+    left: 10px;
+    position: absolute;
+    font-size: 1.7em;
+}
+
+.previous_page:hover {
+    background: #ccc;
+}
+
+@media (max-width: 1250px) {
+    .midbar.open {
+        /*height: 21rem;*/
+    }
+}
+
+@media (max-width: 1066px) {
+    .main, .create_post {
         columns: 4;
+    }
+
+    .midbar.open {
+        height: 14rem;
     }
 
 }
 
 @media (max-width: 660px) {
-    .main {
+    .main, .create_post {
         columns: 2;
     }
+
+    .midbar.open {
+        height: 21rem;
+    }
 }
+
+@media (max-width: 434px) {
+    .midbar.open {
+        height: 34rem;
+    }
+
+    .main, .create_post {
+        columns: 1;
+    }
+
+    .main .card, .create_post .card {
+        margin: 0 auto;
+    }
+
+    .
+}
+
+
+
 

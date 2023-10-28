@@ -39,17 +39,9 @@
 }
 
 .change_profile {
-    width: 230px;
-    height: 50px;
     cursor: pointer;
     margin-left: 7px;
 }
-
-.change_profile.knop {
-    width: 200px;
-    height: 50px;
-}
-
 
 .change_profile a,
 .change_profile a:hover,
@@ -202,10 +194,6 @@ form {
     border-radius: 20px;
 }
 
-.second {
-
-}
-
 
 .add_post h1 {
     padding-top: 20px;
@@ -246,22 +234,19 @@ form {
     background: red;
     color: #fff;
     font-size: 1.2em;
-    /* margin: 0 auto 20px; */
     cursor: pointer;
 }
 
-/*@media (max-width: 992px) {*/
-/*    .main {*/
-/*        columns: 4;*/
-/*    }*/
+@media (max-width: 824px) {
+    form {
+        height: auto;
+        display: block;
+    }
 
-/*}*/
-
-/*@media (max-width: 660px) {*/
-/*    .main {*/
-/*        columns: 2;*/
-/*    }*/
-/*}*/
+    .edit{
+        width: auto;
+    }
+}
 
 
 

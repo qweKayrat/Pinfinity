@@ -28,12 +28,14 @@
     display: flex;
     background: #c8ffec;
     margin-bottom: 10px;
-    border: 2px solid #000;
+    border: 2px solid #ccc;
     border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.1) 5px 10px 10px 4px;
+    min-width: 660px;
 }
 
 .message--unread{
-    background: red;
+    background: pink;
 }
 
 .sender_image {
@@ -49,7 +51,10 @@
 }
 .message_text > * {
     font-size: 1.2em;
-    color: #d500ff;
+    color: #000;
+}
+.message_text > *:hover {
+    color: #0056b3;
 }
 
 .header_message {
@@ -90,9 +95,11 @@
 .content_post h1{
     width: 100%;
     text-align: center;
-    padding-left: 20px;
     font-size: 1.7em;
     border-bottom: 1px solid #178066;
+    color: darkcyan;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
 }
 
 .chat {
@@ -147,6 +154,45 @@ button{
     border-radius: 10px;
 }
 
+.previous_page {
+    text-align: center;
+    padding: 3px;
+    border-radius: 50%;
+    width: 40px;
+    top: 100px;
+    left: 10px;
+    position: absolute;
+    font-size: 1.7em;
+}
+
+.previous_page:hover {
+    background: #ccc;
+}
+
+
+.mess span{
+    display: flex;
+    justify-content: flex-end;
+    color: lightyellow;
+    margin-bottom: 10px;
+}
+
+.mess.left span{
+    display: flex;
+    justify-content: flex-start;
+}
+
+@media (max-width: 1066px) {
+    .content_post{
+        width: auto;
+    }
+}
+
+@media (max-width: 850px) {
+    .inbox{
+        max-width: inherit;
+    }
+}
 
 
 

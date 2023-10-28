@@ -6,10 +6,6 @@ window.addEventListener("DOMContentLoaded", event => {
     const MidBar = document.querySelector('.midbar')
     const toggleCatIcon = document.querySelector('.toggle_cat i')
 
-// const  = document.querySelector('')
-// const  = document.querySelector('')
-
-
     toggleBtn.onclick = function () {
         dropDownMenu.classList.toggle('open')
         const isOpen = dropDownMenu.classList.contains('open')
@@ -34,16 +30,6 @@ window.addEventListener("DOMContentLoaded", event => {
 // Js для messages
 document.addEventListener("DOMContentLoaded", function() {
     let alertBlock = document.getElementById("alert-block");
-    // let closeButton = document.getElementById("close-button");
-
-    // Закрытие блока по нажатию кнопки
-    // closeButton.addEventListener("click", function() {
-    //     alertBlock.style.opacity = "0";
-    //     setTimeout(function() {
-    //         alertBlock.style.display = "none";
-    //     }, 1000); // Исчезнет после 0.4 секунды анимации
-    // });
-
     // Закрытие блока автоматически через 4 секунды
     setTimeout(function() {
         alertBlock.style.opacity = "0";

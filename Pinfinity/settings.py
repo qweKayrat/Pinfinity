@@ -37,8 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'content.apps.ContentConfig',
     'users.apps.UsersConfig',
+
     'ckeditor',
     'ckeditor_uploader',
+    'django.contrib.humanize',
 ]
 
 MIDDLEWARE = [
@@ -136,8 +138,6 @@ EMAIL_HOST_USER = 'kayratgod@gmail.com'
 EMAIL_HOST_PASSWORD = 'rrkxdbyfaueahnpc'
 
 DOMAIN_NAME = 'http://127.0.0.1:8000'
-
-
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
 

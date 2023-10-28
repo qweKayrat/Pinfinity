@@ -34,7 +34,8 @@ a:hover {
 }
 
 .content {
-    margin-top: 85px;
+    padding-top: 85px;
+    /*margin-top: 85px;*/
 }
 
 .image {
@@ -144,34 +145,22 @@ header {
     scale: 1.3;
 }
 
-
-.toggle_account {
-    font-size: 2rem;
-    cursor: pointer;
+.toggle_account{
     max-height: 40px;
     max-width: 46px;
     border-radius: 50%;
     overflow: hidden;
 }
 
-.dropdown_account {
-    position: absolute;
-    right: 5%;
-    top: 75px;
-    height: 0;
-    width: 200px;
-    background: rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(15px);
-    border-radius: 10px;
-    overflow: hidden;
-    transition: height .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+.toggle_btn {
+    display: none;
+    position: fixed;
+    top: 0.7rem;
+    right: 2rem;
+    font-size: 2rem;
+    cursor: pointer;
 }
 
-
-.dropdown_account.open {
-    height: 100px;
-
-}
 
 .dropdown_menu li,
 .dropdown_account li {
@@ -202,8 +191,12 @@ header {
     transition: height .2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
+.dropdown_menu.auth.open {
+    height: 260px;
+}
+
 .dropdown_menu.open {
-    height: 240px;
+    height: 130px;
 }
 
 .dropdown_menu li {
@@ -241,20 +234,25 @@ header {
     .form-search input {
         width: 20em;
     }
-
-    .midbar.open {
-        height: 14rem;
-    }
 }
 
 @media (max-width: 992px) {
-    .navbar .links,
+    .navbar .links li,
     .navbar .action_btn {
         display: none;
     }
+    
+    .search_form{
+        margin-right: 5rem;
+    }
 
-    .navbar .toggle_btn {
+    .logo{
+        margin-left: 1rem;
+    }
+    
+    .toggle_btn {
         display: block;
+        cursor: pointer;
     }
 
     .navbar {
@@ -266,14 +264,23 @@ header {
         display: block;
     }
 
+    .links li a{
+        color: #00ff65;
+    }
+
 }
 
-@media (max-width: 660px) {
+@media (max-width: 544px) {
+    .search_form{
+        display: none;
+    }
+
     .dropdown_menu {
         left: 2rem;
         width: unset;
     }
 }
+
 
 /* Пагинация */
 .pagination .list-pages {
@@ -332,6 +339,10 @@ header {
     background: #95f5d3;
     opacity: 1;
     transition: opacity 1s ease-in-out;
+}
+
+.alert-error {
+    background: lightcoral;
 }
 
 .message_close {

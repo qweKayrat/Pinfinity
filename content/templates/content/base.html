@@ -29,11 +29,12 @@
                 {% if m.url_name == 'add_post' %}
                 <li><a href="{% url m.url_name %}" class="action_btn">{{ m.title }}</a></li>
                 {% elif m.url_name == 'faq' %}
-                <div>
+                <div class="search_form">
                     <form id="search" class="form" action="{% url 'index' %}" method="get">
                         <div class="form-search">
                             <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-                            <input class="search-ideas" type="text" name="search_query" placeholder="Поиск идей"/>
+                            <input class="search-ideas" type="text" name="search_query" placeholder="Поиск идей"
+                                   value="{{ search_query }}"/>
                         </div>
                     </form>
                 </div>
@@ -53,8 +54,6 @@
                 {% else %}
                 <li><a href="{% url m.url_name %}">{{ m.title }}</a></li>
                 {% endif %}
-                {% if ind == 3%}
-                {% endif %}
                 {% endfor %}
             </ul>
         </div>
@@ -62,30 +61,35 @@
     <div class="toggle_btn">
         <i class="fa-solid fa-bars"></i>
     </div>
-    <div class="dropdown_menu">
-        <ul class="links">
-            {% for m in menu %}
-            {% if m.url_name == 'profile' %}
-            <li><a href="{% url m.url_name request.user.username %}">{{ m.title }}</a></li>
-            {% else %}
-            <li><a href="{% url m.url_name %}">{{ m.title }}</a></li>
+    {% if request.user.is_authenticated %}
+    <div class="dropdown_menu auth">
+        {% else %}
+        <div class="dropdown_menu">
             {% endif %}
-            {% endfor %}
-        </ul>
-    </div>
+            <ul class="links">
+                {% for m in menu %}
+                {% if m.url_name == 'profile' %}
+                <li><a href="{% url m.url_name request.user.username %}">{{ m.title }}</a></li>
+                {% else %}
+                <li><a href="{% url m.url_name %}">{{ m.title }}</a></li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
 </header>
 
 <div class="content">
     <div class="wrap">
         {% if messages or form.errors %}
-        <div id="alert-block" class="alert" role="alert">
-            {% if messages %}
-                {% for message in messages %}
-                {{ message }}
-                {% endfor %}
-            {% else %}
-                {{ form.errors }}
-            {% endif %}
+        {% if messages %}
+        {% for message in messages %}
+        <div id="alert-block" class="alert alert-{{message.tags}}" role="alert">
+        {{ message }}
+        {% endfor %}
+        {% else %}
+        <div id="alert-block-form" class="alert" role="alert">
+        {{ form.errors }}
+        {% endif %}
         </div>
         {% endif %}
 

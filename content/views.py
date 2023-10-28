@@ -89,6 +89,8 @@ class ShowPost(DataMixin, DetailView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
+
+        previous_page = self.request.META.get('HTTP_REFERER')
         user = self.request.user
         saved_post = SavedImage.objects.filter(user__username=user).select_related('content')
 
@@ -100,8 +102,8 @@ class ShowPost(DataMixin, DetailView):
             is_subscriber = Subscription.objects.is_subscriber(user, post_owner)
 
         context.update({'saved_post': saved_post, 'subscribers_count': subscribers_count,
-                        'is_subscriber': is_subscriber, 'form_comment': ReviewForm()
-                        })
+                        'is_subscriber': is_subscriber, 'form_comment': ReviewForm(),
+                        'previous_page': previous_page})
 
         c_def = self.get_user_context()
         return dict(list(context.items()) + list(c_def.items()))
@@ -133,7 +135,8 @@ class AddPost(LoginRequiredMixin, DataMixin, CreateView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-
+        previous_page = self.request.META.get('HTTP_REFERER')
+        context['previous_page'] = previous_page
         c_def = self.get_user_context(title='Добавление поста')
         return dict(list(context.items()) + list(c_def.items()))
 
@@ -148,6 +151,17 @@ class AddPost(LoginRequiredMixin, DataMixin, CreateView):
         except Exception as e:
             error_message = f"Ошибка сохранения данных: {str(e)}"
             return HttpResponse(error_message)
+
+
+def delete_post(request, image_id):
+    user = request.user
+    image = Content.objects.get(id=image_id)
+    if image.owner != user:
+        messages.error(request, 'Вы не можете удалить изображение, не являясь его автором')
+    elif image is not None:
+        image.delete()
+        messages.success(request, 'Пост успешно удалён')
+    return redirect('profile', user)
 
 
 class FAQ(DataMixin, ListView):
@@ -264,8 +278,6 @@ def remove_like(request, image_id):
             saved_like.delete()
             image.get_vote_like()
     return redirect(current_page)
-
-
 
 # Попытки AJAX подгрузки контента
 # def load_more_content(request):

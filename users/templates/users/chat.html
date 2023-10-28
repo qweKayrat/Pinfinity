@@ -1,9 +1,18 @@
 {% extends 'content/base.html' %}
 {% load static %}
+{% load humanize %}
 {% block css %}
 <link href="{% static 'css/messages.css' %}" rel="stylesheet">
 {% endblock css %}
 {% block content %}
+{% if previous_page %}
+<div class="previous_page">
+    <a href="{{ previous_page }}" class="prev_page">
+        <i class="fa-solid fa-arrow-left"></i>
+    </a>
+</div>
+{% endif %}
+
 <div class="wrap_post">
     <div class="content_post">
         <h1>Чат с пользователем {{ sender }}</h1>
@@ -14,6 +23,7 @@
             {% else %}
             <div class="mess left">
             {% endif %}
+                <span>{{ mes.created|naturalday }}</span>
                 {{ mes.body }}
             </div>
             {% endfor %}

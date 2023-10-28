@@ -28,13 +28,16 @@ class ProfileUser(DataMixin, ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
+
+        previous_page = self.request.META.get('HTTP_REFERER')
         user = self.get_object()
         c_def = self.get_user_context()
 
         saved_posts_user = Content.objects.filter(saved_images__user__username=self.kwargs['username'])
         subscribers_count = Subscription.objects.count_subscribers(user)
 
-        context.update({'user': user, 'saved_posts': saved_posts_user, 'subscribers_count': subscribers_count})
+        context.update({'user': user, 'saved_posts': saved_posts_user, 'subscribers_count': subscribers_count,
+                        'previous_page': previous_page})
 
         if self.request.user.is_authenticated:
             saved_current_user = Content.objects.filter(saved_images__user=self.request.user)
@@ -58,6 +61,11 @@ class EditProfileUser(LoginRequiredMixin, DataMixin, UpdateView):
         c_def = self.get_user_context(title='Изменение профиля')
         return dict(list(context.items()) + list(c_def.items()))
 
+    def form_valid(self, form):
+        super().form_valid(form)
+        messages.success(self.request, 'Данные были успешно изменены.')
+        return super().form_valid(form)
+
 
 class Messages(LoginRequiredMixin, DataMixin, ListView):
     model = Message
@@ -68,8 +76,10 @@ class Messages(LoginRequiredMixin, DataMixin, ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_context()
+
         count_unread_messages = Message.objects.count_unread_messages(self.request.user)
         context['unread_messages'] = count_unread_messages
+
         return dict(list(context.items()) + list(c_def.items()))
 
     def get_queryset(self):
@@ -107,6 +117,9 @@ class Chat(LoginRequiredMixin, DataMixin, ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
+        previous_page = self.request.META.get('HTTP_REFERER')
+        context['previous_page'] = previous_page
+
         c_def = self.get_user_context(form=MessageForm(), sender=self.kwargs['sender'])
         return dict(list(context.items()) + list(c_def.items()))
 
@@ -189,7 +202,7 @@ def subscribe(request, username):
     if user.is_anonymous:
         messages.error(request, 'Для подписки необходимо авторизоваться')
     elif username == user.username:
-        messages.error(request, 'Нельзя подписаться сам на себя')
+        messages.error(request, 'Нельзя подписаться на самого себя')
     else:
         target_user = User.objects.get(username=username)
         subscriber = Subscription.objects.filter(subscriber=user, target_user=target_user)

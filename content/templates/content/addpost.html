@@ -4,6 +4,14 @@
 <link href="{% static 'css/posts.css' %}" rel="stylesheet">
 {% endblock css %}
 {% block content %}
+{% if previous_page %}
+<div class="previous_page">
+    <a href="{{ previous_page }}" class="prev_page">
+        <i class="fa-solid fa-arrow-left"></i>
+    </a>
+</div>
+{% endif %}
+
 <div class="add">
     <form action="{% url 'add_post' %}" method="post" enctype="multipart/form-data" class="add_post">
         <h1>{{ title }}</h1>

@@ -1,5 +1,6 @@
 .wrap {
     max-width: 1300px;
+    min-width: 692px;
     margin: 0 auto;
 }
 
@@ -140,6 +141,40 @@
     cursor: pointer;
 }
 
+
+@media (max-width: 992px) {
+    .faq_content {
+        width: 90vh;
+    }
+}
+
+@media (max-width: 892px) {
+    .faq_content {
+        width: 80vh;
+    }
+
+    .list-group-item {
+        width: 170px;
+    }
+}
+
+@media (max-width: 792px) {
+    .faq_content {
+        width: 70vh;
+    }
+    .sidebar{
+        margin-right: 20px;
+    }
+}
+
+@media (max-width: 692px) {
+    .faq_content {
+        width: 60vh;
+    }
+    .sidebar{
+        margin-right: 30px;
+    }
+}
 
 
 

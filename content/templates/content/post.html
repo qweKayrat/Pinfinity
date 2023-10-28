@@ -4,6 +4,14 @@
 <link href="{% static 'css/posts.css' %}" rel="stylesheet">
 {% endblock css %}
 {% block content %}
+{% if previous_page %}
+<div class="previous_page">
+    <a href="{{ previous_page }}" class="prev_page">
+        <i class="fa-solid fa-arrow-left"></i>
+    </a>
+</div>
+{% endif %}
+
 <div class="wrap_post">
     <div class="content_post">
         <div class="post">
@@ -12,6 +20,9 @@
             </div>
             <div class="post_text">
                 <div class="save_btn save_post">
+                    {% if post.owner == request.user %}
+                    <a href="{% url 'delete_post' post.id %}" class="btn remove_post">удалить</a>
+                    {% endif %}
                     {% if post.saved %}
                     <a href="{% url 'saved_remove' post.id %}" class="btn saved">сохранено</a>
                     {% else %}
